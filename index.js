@@ -60,6 +60,11 @@ const annotatedChunks =   chunkedSource.map(block => {
   return { ...block, type }
 });
 
+// Further work:
+//
+//  - We need to match the comments with their corresponding code piece
+//  - Consecutive comments are threated as the same comment
+
 console.log(
   annotatedChunks
 );
