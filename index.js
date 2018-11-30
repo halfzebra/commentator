@@ -1,4 +1,6 @@
 const { parse } = require("@babel/parser");
+
+// TODO: remove this and add it somewhere and convert the whole thing to an argument.
 const fixture = "console.log('// hello'); // hello\nvar a = 1; /* \n boohoo */";
 
 const ast = parse(fixture);
@@ -49,15 +51,15 @@ const chunkedSource = chunkStartEndPairs.map((pos, i) => {
 });
 
 // Figure out whether it's code or a comment
-const annotatedChunks =   chunkedSource.map(block => {
+const annotatedChunks = chunkedSource.map(block => {
   const [x, y] = block.pos;
-  let type = 'code'
+  let type = "code";
 
   if (commentsPositions.find(({ start, end }) => start === x && end === y)) {
-    type = 'comment'
+    type = "comment";
   }
 
-  return { ...block, type }
+  return { ...block, type };
 });
 
 // Further work:
@@ -65,6 +67,4 @@ const annotatedChunks =   chunkedSource.map(block => {
 //  - We need to match the comments with their corresponding code piece
 //  - Consecutive comments are threated as the same comment
 
-console.log(
-  annotatedChunks
-);
+console.log(annotatedChunks);
